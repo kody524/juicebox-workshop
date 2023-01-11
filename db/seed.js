@@ -8,9 +8,9 @@ const {
     try{
         console.log('starting to create users...');
 
-        const albert = await createUsers({username: 'albert', password: 'bertie99'});
-        const sandra = await createUsers({username: 'sandra', password: 'sandra'});
-        const glamgal = await createUsers({username: 'glamgal', password: 'glamgal'});
+        const albert = await createUsers({name: 'albert', username: 'albert', password: 'bertie99', location: 'texas'});
+        const sandra = await createUsers({ name: 'sandy', username: 'sandra', password: 'sandra',location: 'texas'});
+        const glamgal = await createUsers({ name: 'girl', username: 'glamgal', password: 'glamgal', location: 'texas'});
         
         
         console.log("Finished creating users!")
@@ -42,8 +42,11 @@ const {
       await client.query(`
         CREATE TABLE users (
           id SERIAL PRIMARY KEY,
+          name varchar(255) NOT NULL,
           username varchar(255) UNIQUE NOT NULL,
-          password varchar(255) NOT NULL
+          password varchar(255) NOT NULL,
+          location varchar(255) NOT NULL,
+          active BOOLEAN DEFAULT true
         );
       `);
   
