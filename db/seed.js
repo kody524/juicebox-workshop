@@ -57,7 +57,7 @@ async function createTables() {
       CREATE TABLE post_tags (
         "postId" INTEGER REFERENCES posts(id),
         "tagId"  INTEGER REFERENCES tags(id),
-        UNIQUE ("postId","tagId")
+        UNIQUE ("postId", "tagId")
       );
     `);
 
@@ -109,13 +109,14 @@ async function createInitialPosts() {
       content: "This is my first post. I hope I love writing blogs as much as I love writing them.",
       tags: ["#happy", "#youcandoanything"]
     });
-
+console.log('HERE')
     await createPost({
       authorId: sandra.id,
       title: "How does this work?",
       content: "Seriously, does this even do anything?",
       tags: ["#happy", "#worst-day-ever"]
     });
+    console.log('HERE1')
 
     await createPost({
       authorId: glamgal.id,
@@ -157,16 +158,19 @@ async function testDB() {
       name: "Newname Sogood",
       location: "Lesterville, KY"
     });
-    console.log("Result:", updateUserResult);
-    console.log("Calling updatePost on posts[1], only updating tags");
-    const updatePostTagsResult = await updatePost(posts[1].id, {
-      tags: ["#youcandoanything", "#redfish", "#bluefish"]
-    });
-    console.log("Result:", updatePostTagsResult);
-
     console.log("Calling getAllPosts");
     const posts = await getAllPosts();
     console.log("Result:", posts);
+    const updatePostTagsResult = await updatePost(posts[1].id, {
+      tags: ["#youcandoanything", "#redfish", "#bluefish"]
+    });
+    console.log("Result:", updateUserResult);
+    console.log("Calling updatePost on posts[1], only updating tags");
+    
+    console.log("Result:", updatePostTagsResult);
+
+   
+    
 
     console.log("Calling updatePost on posts[0]");
     const updatePostResult = await updatePost(posts[0].id, {
@@ -177,10 +181,12 @@ async function testDB() {
     console.log("Calling getPostsByTagName with #happy");
     const postsWithHappy = await getPostsByTagName("#happy");
     console.log("Result:", postsWithHappy);
+    
 
     console.log("Calling getUserById with 1");
     const albert = await getUserById(1);
     console.log("Result:", albert);
+    
 
     console.log("Finished database tests!");
   } catch (error) {
