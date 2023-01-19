@@ -7,7 +7,6 @@ const {
   createPost,
   updatePost,
   getAllPosts,
-  
   getPostsByTagName
 } = require('./index');
 

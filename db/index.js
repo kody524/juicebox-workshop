@@ -117,6 +117,18 @@ async function createPost({ authorId, title, content, tags = [] }) {
   }
 }
 
+async function getAllTags(){
+  try{
+    const {rows} = await client.query(`
+    SELECT * FROM tags;
+    `)
+    return rows;
+  }catch(e){
+    console.log(e)
+    throw e;
+  }
+}
+
 async function updatePost(postId, fields = {}) {
   // read off the tags & remove that field
   const { tags } = fields; // might be undefined
@@ -349,4 +361,5 @@ module.exports = {
   createTags,
   addTagsToPost,
   getPostsByTagName,
+  getAllTags
 };
