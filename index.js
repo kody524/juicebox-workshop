@@ -3,13 +3,15 @@ const PORT = 3000;
 const express = require('express');
 const morgan = require('morgan');
 
-const { client } = require('./db');
+
+const { client} = require('./db');
 
 
 
 const server = express();
 server.use(morgan('dev'));
 server.use(express.json())
+
 const apiRouter = require('./api');
 server.use('/api', apiRouter);
 server.use((req, res, next) => {
