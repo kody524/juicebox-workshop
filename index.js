@@ -4,11 +4,14 @@ const express = require('express');
 const morgan = require('morgan');
 
 
+
+
 const { client} = require('./db');
 
 
 
 const server = express();
+
 server.use(morgan('dev'));
 server.use(express.json())
 
